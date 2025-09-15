@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/Home/HomePage";
+import HomePageKasir from "./pages/Home/HomePageKasir";
 import LoginPage from "./pages/login/LoginPage"; 
 import RegisterPage from "./pages/login/RegisterPage";
 import BillingUnit from "./pages/Billing/billingUnit";
@@ -18,6 +19,7 @@ return (
             <Route path="/" element={<LoginPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path="/home-kasir" element={<HomePageKasir />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/billing-unit" element={<BillingUnit />} />
             <Route path="/billing-order" element={<BillingOrder />} />

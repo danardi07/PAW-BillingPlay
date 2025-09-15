@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 function RegisterPage() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("kasir");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/register", { email, password });
+      const res = await axios.post("http://localhost:3001/api/auth/register", {
+        username,
+        email,
+        password,
+        role,
+      });
       alert(res.data.msg);
       navigate("/login");
     } catch (err) {
@@ -70,8 +77,17 @@ function RegisterPage() {
 
   return (
     <div style={containerStyle}>
-      <h2>Register Admin BillingPlay</h2>
+      <h2>Register BillingPlay</h2>
       <form style={formStyle} onSubmit={handleSubmit}>
+        <label>Username:</label>
+        <input
+          type="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          style={inputStyle}
+        />
+
         <label>Email:</label>
         <input
           type="email"
@@ -80,6 +96,7 @@ function RegisterPage() {
           required
           style={inputStyle}
         />
+
         <label>Password:</label>
         <input
           type="password"
@@ -88,6 +105,18 @@ function RegisterPage() {
           required
           style={inputStyle}
         />
+
+        <label>Pilih Role:</label>
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          style={inputStyle}
+          required
+        >
+        
+          <option value="admin">Admin</option>
+          <option value="kasir">Kasir</option>
+        </select>
 
         <button type="submit" style={buttonStyle}>
           Register

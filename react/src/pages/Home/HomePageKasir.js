@@ -35,38 +35,17 @@ const HomePage = () => {
     <div style={containerStyle}>
       <h1>🎮 BillingPlay</h1>
       <p>
-        Admin Billing Play
+        Sistem Billing PlayStation
       </p>
 
-      
-
       {}
       <Link
-        to="/ps"
-        style={{ ...buttonStyle, backgroundColor: "#ffa502" }}
-        onMouseOver={(e) => (e.target.style.backgroundColor = "#ffbe76")}
-        onMouseOut={(e) => (e.target.style.backgroundColor = "#ffa502")}
+        to="/billing-order"
+        style={buttonStyle}
+        onMouseOver={(e) => (e.target.style.backgroundColor = "#ff6b81")}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "#ff4757")}
       >
-        Tambah PS
-      </Link>
-
-      {}
-      <Link
-        to="/tv"
-        style={{ ...buttonStyle, backgroundColor: "#ff02a2ff" }}
-        onMouseOver={(e) => (e.target.style.backgroundColor = "#f233acff")}
-        onMouseOut={(e) => (e.target.style.backgroundColor = "#ff02a2ff")}
-      >
-        Tambah TV
-      </Link>
-
-      <Link
-        to="/billing-unit"
-        style={{ ...buttonStyle, backgroundColor: "#15e906ff" }}
-        onMouseOver={(e) => (e.target.style.backgroundColor = "#5af984ff")}
-        onMouseOut={(e) => (e.target.style.backgroundColor = "#15e906ff")}
-      >
-        Kelola Billing
+        Start Billing
       </Link>
 
       {}

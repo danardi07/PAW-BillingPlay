@@ -8,24 +8,35 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-     
-      const response = await axios.post(
-        "http://localhost:3001/api/auth/login",
-        { email, password }
-      );
+  e.preventDefault();
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/api/auth/login",
+      { email, password }
+    );
 
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+    // Simpan token & user
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      alert("Login berhasil!");
-      navigate("/home"); 
-    } catch (error) {
-      console.error("Login gagal:", error.response?.data);
-      alert("Login gagal. Periksa kembali email dan password Anda.");
+    alert("Login berhasil!");
+
+    // Cek role user dan arahkan sesuai role
+    const role = response.data.user.role;
+
+    if (role === "admin") {
+      navigate("/home"); // ke HomePage
+    } else if (role === "kasir") {
+      navigate("/home-kasir"); // ke HomePageKasir
+    } else {
+      navigate("/home"); // default kalau role lain
     }
-  };
+  } catch (error) {
+    console.error("Login gagal:", error.response?.data);
+    alert("Login gagal. Periksa kembali email dan password Anda.");
+  }
+};
+
 
   const containerStyle = {
     display: "flex",
