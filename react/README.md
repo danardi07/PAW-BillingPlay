@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+🌎 Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Billing Play adalah aplikasi web berbasis React (frontend) dan Express (backend) yang membantu pengelola rental PlayStation (PS) dalam mencatat, mengelola, dan memantau sesi permainan pelanggan secara efisien.
 
-## Available Scripts
+Fitur utama meliputi:
 
-In the project directory, you can run:
+Pemilihan unit TV/PS yang tersedia untuk pelanggan.
 
-### `npm start`
+Pencatatan durasi bermain dan perhitungan otomatis biaya berdasarkan tarif per jam.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Pencatatan metode pembayaran (QRIS atau tunai) dan status pemakaian unit.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Manajemen unit PS/TV dan riwayat transaksi secara terpusat.
 
-### `npm test`
+Aplikasi ini memanfaatkan React untuk antarmuka interaktif, Express untuk RESTful API backend, dan database (misalnya MySQL atau MongoDB) untuk menyimpan data unit, transaksi, dan master data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Role:
 
-### `npm run build`
+Admin: Mengelola data master seperti daftar unit PS/TV, daftar barang, tarif layanan, dan kasir. Admin tidak menangani transaksi harian.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Kasir: Mencatat transaksi pelanggan, termasuk pemilihan unit PS/TV, durasi bermain, metode pembayaran, dan memantau status unit.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+👷‍♀️ Problem Space (Job to be done)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Pengusaha rental PS sering kesulitan dalam mencatat sesi bermain secara akurat dan mengelola transaksi secara efisien. Proses manual dapat menyebabkan kesalahan hitung, hilangnya data, dan pelayanan lambat.
 
-### `npm run eject`
+Sebagai kasir, saya ingin mengetahui unit TV/PS yang kosong, mencatat durasi bermain dan unit, menghitung biaya otomatis, menandai pembayaran, serta mengakses riwayat transaksi dan unit.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Sebagai admin, saya ingin mengelola data master seperti unit PS/TV, barang, tarif layanan, dan kasir tanpa terlibat dalam pencatatan transaksi harian.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+💻 Tech Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Frontend: React, React Router, Axios
 
-## Learn More
+Backend: Express.js, Node.js, REST API
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Database: MySQL
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+POST MAN DOKUMENTASI :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![](../react/screenshot/Screenshot%202025-09-16%20093907.png)
+![](../react/screenshot/Screenshot%202025-09-16%20093916.png)
+![](../react/screenshot/Screenshot%202025-09-16%20093954.png)
+![](../react/screenshot/Screenshot%202025-09-16%20094010.png)
