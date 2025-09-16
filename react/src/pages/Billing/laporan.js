@@ -107,6 +107,9 @@ const Laporan = () => {
                   <th style={thTdStyle}>Durasi (jam)</th>
                   <th style={thTdStyle}>Harga per Jam</th>
                   <th style={thTdStyle}>Subtotal</th>
+                  <th style={thTdStyle}>Metode Pembayaran</th>
+                  <th style={thTdStyle}>Foto</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -117,6 +120,18 @@ const Laporan = () => {
                     <td>{t.durasi}</td>
                     <td>{t.harga_per_jam}</td>
                     <td>{t.subtotal}</td>
+                    <td>{t.metode_pembayaran}</td>
+                    <td>
+                      {t.foto ? (
+                        <img
+                          src={`http://localhost:3001/uploads/${t.foto}`}
+                          alt="foto"
+                          style={{ width: "80px", borderRadius: "6px" }}
+                        />
+                      ) : (
+                        "-"
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
