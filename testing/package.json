@@ -1,0 +1,21 @@
+{
+  "name": "testing-billingplay",
+  "version": "1.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testMatch": [
+      "**/*.test.js"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.21.2",
+    "jest": "^29.7.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  }
+}

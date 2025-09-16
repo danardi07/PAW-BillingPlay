@@ -10,7 +10,11 @@ const Tambah = () => {
   const [durasi, setDurasi] = useState(1);
   const [endTime, setEndTime] = useState("");
   const [subtotal, setSubtotal] = useState(0);
+  const [metodePembayaran, setMetodePembayaran] = useState("CASH");
   const status = "Digunakan";
+  const [foto, setFoto] = useState(null);
+
+
 
 
   useEffect(() => {
@@ -50,32 +54,43 @@ const Tambah = () => {
   }, [selectedBilling, startTime, durasi, billingList]);
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!selectedBilling || !startTime || durasi <= 0) return alert("Lengkapi semua field dengan benar.");
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (!selectedBilling || !startTime || durasi <= 0) {
+        return alert("Lengkapi semua field dengan benar.");
+      }
 
-    try {
-      const res = await axios.post("http://localhost:3001/api/transaksi", {
-        billing_id: selectedBilling,
-        start_time: startTime,
-        end_time: endTime,
-        durasi,
-        harga_per_jam: hargaPerJam,
-        status,
-        subtotal,
-      });
-      alert(res.data.msg || "Transaksi berhasil ditambahkan!");
-      setSelectedBilling("");
-      setStartTime("");
-      setDurasi(1);
-      setEndTime("");
-      setSubtotal(0);
-      fetchTransaksi(); 
-    } catch (err) {
-      console.error(err.response?.data);
-      alert(err.response?.data?.msg || "Gagal menambahkan transaksi.");
-    }
-  };
+      try {
+        const formData = new FormData();
+        formData.append("billing_id", selectedBilling);
+        formData.append("start_time", startTime);
+        formData.append("end_time", endTime);
+        formData.append("durasi", durasi);
+        formData.append("harga_per_jam", hargaPerJam);
+        formData.append("status", status);
+        formData.append("subtotal", subtotal);
+        formData.append("metode_pembayaran", metodePembayaran);
+        formData.append("foto", foto);
+
+        const res = await axios.post("http://localhost:3001/api/transaksi", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+
+        alert(res.data.msg || "Transaksi berhasil ditambahkan!");
+        setSelectedBilling("");
+        setStartTime("");
+        setDurasi(1);
+        setEndTime("");
+        setSubtotal(0);
+        setMetodePembayaran("");
+        setFoto(null);
+        fetchTransaksi();
+      } catch (err) {
+        console.error(err.response?.data);
+        alert(err.response?.data?.msg || "Gagal menambahkan transaksi.");
+      }
+    };
+
 
 
   const containerStyle = { display: "flex", flexDirection: "column", alignItems: "center", padding: "50px", background: "linear-gradient(135deg, #1e1e2f, #2a2a40)", color: "white", minHeight: "100vh", fontFamily: "sans-serif" };
@@ -118,36 +133,70 @@ const Tambah = () => {
         <label style={labelStyle}>Subtotal:</label>
         <input type="number" value={subtotal} readOnly style={inputStyle} />
 
+        <label style={labelStyle}>Metode Pembayaran:</label>
+        <select
+          value={metodePembayaran}
+          onChange={(e) => setMetodePembayaran(e.target.value)}
+          style={inputStyle}
+          required
+        >
+          <option value="QRIS">QRIS</option>
+          <option value="CASH">CASH</option>
+        </select>
+
+        <label style={labelStyle}>Upload Foto:</label>
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={(e) => setFoto(e.target.files[0])} 
+          style={inputStyle} 
+        />
+
         <button type="submit" style={buttonStyle}>Tambah</button>
       </form>
 
       {}
-      <table style={tableStyle}>
-        <thead>
-          <tr>
-            <th style={thTdStyle}>Billing</th>
-            <th style={thTdStyle}>Start Time</th>
-            <th style={thTdStyle}>End Time</th>
-            <th style={thTdStyle}>Durasi (jam)</th>
-            <th style={thTdStyle}>Harga per Jam</th>
-            <th style={thTdStyle}>Subtotal</th>
-            <th style={thTdStyle}>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-         {transaksiList.map((t) => (
-            <tr key={t.id}>
-              <td>{t.nama_unit}</td>
-              <td>{new Date(t.start_time).toLocaleString()}</td>
-              <td>{new Date(t.end_time).toLocaleString()}</td>
-              <td>{t.durasi}</td>
-              <td>{t.harga_per_jam}</td>
-              <td>{t.subtotal}</td>
-              <td>{t.status}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+<table style={tableStyle}>
+  <thead>
+    <tr>
+      <th style={thTdStyle}>Billing</th>
+      <th style={thTdStyle}>Start Time</th>
+      <th style={thTdStyle}>End Time</th>
+      <th style={thTdStyle}>Durasi (jam)</th>
+      <th style={thTdStyle}>Harga per Jam</th>
+      <th style={thTdStyle}>Subtotal</th>
+      <th style={thTdStyle}>Metode Pembayaran</th>
+      <th style={thTdStyle}>Status</th>
+      <th style={thTdStyle}>Foto</th> {}
+    </tr>
+  </thead>
+  <tbody>
+    {transaksiList.map((t) => (
+      <tr key={t.id}>
+        <td>{t.nama_unit}</td>
+        <td>{new Date(t.start_time).toLocaleString()}</td>
+        <td>{new Date(t.end_time).toLocaleString()}</td>
+        <td>{t.durasi}</td>
+        <td>{t.harga_per_jam}</td>
+        <td>{t.subtotal}</td>
+        <td>{t.metode_pembayaran}</td>
+        <td>{t.status}</td>
+        <td>
+          {t.foto ? (
+            <img
+              src={`http://localhost:3001/uploads/${t.foto}`} 
+              alt="foto"
+              style={{ width: "80px", borderRadius: "6px" }}
+            />
+          ) : (
+            "-"
+          )}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
     </div>
   );
 };
