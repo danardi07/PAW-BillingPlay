@@ -16,7 +16,7 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3001;
 
-
+app.use("/uploads", express.static("uploads"));
 app.set("view engine", "ejs");
 app.set("layout", "layouts/main-layout");
 
@@ -25,7 +25,6 @@ app.use(expressLayout);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tambah", tambahRoutes);
@@ -43,6 +42,11 @@ app.get("/", (req, res) => {
 
 app.use((req, res) => {
   res.status(404).send("404 - Page Not Found");
+});
+
+app.use((err, req, res, next) => {
+  console.error("Server Error:", err.stack);
+  res.status(500).json({ msg: "Terjadi kesalahan server", error: err.message });
 });
 
 app.listen(port, () => {
